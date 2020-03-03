@@ -10,6 +10,8 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+const employeeArray = [];
+
 const newEmployeeQuestion = [
     {
         type: "list",
@@ -90,12 +92,13 @@ const internQuestions = [
 
 
 inquirer.prompt(managerQuestions).then(function(managerRes) {
-    const manager = new Manager(managerRes.name, managerRes.id, managerRes.email);
+    const manager = new Manager(managerRes.name, managerRes.id, managerRes.email, managerRes.officeNumber);
+    employeeArray.push(manager);
     createEmployee(); 
 });
 
 
-const employeeArray = [];
+
 function createEmployee() {
     inquirer.prompt(newEmployeeQuestion).then(function(employee) {
         if (employee.teamMember === "Engineer") {

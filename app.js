@@ -79,12 +79,14 @@ const internQuestions = [
     {
         type: "input",
         message: "What is your intern's id?",
-        name: "id"
+        name: "id",
+        validate: validateInput
     },
     {
         type: "input",
         message: "What is your intern's email?",
-        name: "email"
+        name: "email",
+        validate: validateInput
     },
     {
         type: "input",
@@ -132,6 +134,16 @@ function createEmployee() {
 }
 
 function validateInput(data) {
-    
+    for (let i = 0; i < employeeArray.length; i++) {
+        if (employeeArray[i].id === data || data < 0) {
+            return "That is not a valid id";
+        }
+        if (employeeArray[i].email === data) {
+            return "That is not a valid email"
+        }
+        if (employeeArray[i].github === data) {
+            return "That github username is already taken by another employee"
+        }
+    }
     return true;
 }
